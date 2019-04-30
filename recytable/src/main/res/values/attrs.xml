@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+    表格控件属性
+
+    tableColumnPadding  表格item左右间距
+-->
+    <declare-styleable name="lx_recycle_table">
+
+        <attr name="bg_color" format="color"/>
+        <attr name="divider_color" format="color"/>
+        <!-- 只有行的适配器需要设置固定的宽度-->
+        <attr name="divider_width" format="dimension"/>
+        <attr name="item_text_color" format="color"/>
+        <attr name="item_text_size" format="integer"/>
+        <attr name="item_text_padding" format="dimension"/>
+        <attr name="item_text_padding_start" format="dimension"/>
+        <attr name="item_text_padding_end" format="dimension"/>
+        <attr name="item_text_padding_top" format="dimension"/>
+        <attr name="item_text_padding_bottom" format="dimension"/>
+
+
+    </declare-styleable>
+
+</resources>

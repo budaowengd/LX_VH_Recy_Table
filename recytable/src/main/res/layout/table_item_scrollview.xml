@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+>
+
+    <LinearLayout
+            android:id="@+id/ll_root"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <LinearLayout
+                android:id="@+id/ll_first_column_contain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:background="#9883"
+                tools:layout_width="50dp"
+                tools:layout_height="50dp"
+                android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <com.lx.recytable.TableItemHorizontalScrollView
+                android:id="@+id/hs_scroll_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:scrollbars="none"
+                tools:background="#3f00"
+                tools:layout_height="50dp">
+        <!--
+        android:showDividers="end|beginning|middle"
+                    android:divider="@drawable/ll_divider"
+        -->
+            <LinearLayout
+
+                    android:id="@+id/ll_contain_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+            </LinearLayout>
+        </com.lx.recytable.TableItemHorizontalScrollView>
+
+    </LinearLayout>
+</layout>
