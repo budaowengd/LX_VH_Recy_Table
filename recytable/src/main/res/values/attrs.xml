@@ -11,15 +11,23 @@
         <attr name="divider_color" format="color"/>
         <!-- 只有行的适配器需要设置固定的宽度-->
         <attr name="divider_width" format="dimension"/>
-        <attr name="item_text_color" format="color"/>
+        <attr name="item_text_normal_color" format="color"/>
+        <attr name="item_text_selected_color" format="color"/>
+
+
+        <attr name="item_text_selected_bg_color" format="color"/>
+        <attr name="item_text_normal_bg_color" format="color"/>
+
         <attr name="item_text_size" format="integer"/>
-        <attr name="item_text_padding" format="dimension"/>
-        <attr name="item_text_padding_start" format="dimension"/>
-        <attr name="item_text_padding_end" format="dimension"/>
-        <attr name="item_text_padding_top" format="dimension"/>
-        <attr name="item_text_padding_bottom" format="dimension"/>
+        <attr name="item_text_height" format="dimension"/>
 
+    <!--    <attr name="item_text_padding_top" format="dimension"/>
+        <attr name="item_text_padding_bottom" format="dimension"/>-->
 
+        <attr name="title_text_padding_start" format="dimension"/>
+        <attr name="title_text_padding_end" format="dimension"/>
+        <attr name="title_text_padding_top" format="dimension"/>
+        <attr name="title_text_padding_bottom" format="dimension"/>
     </declare-styleable>
 
 </resources>

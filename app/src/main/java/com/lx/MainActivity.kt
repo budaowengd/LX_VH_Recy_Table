@@ -3,23 +3,51 @@ package com.lx
 import android.content.res.Resources
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.annotation.Dimension
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.databinding.ObservableInt
 import com.lx.recytable.RecycleTableView
 import com.lx.recytable.TableDataListener
+import com.lx.recytable.databinding.TableItemCellTvBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var activity: AppCompatActivity
+    lateinit var tableView: RecycleTableView
+    var skuNum=10
+    var selectSkuNum= ObservableInt(skuNum)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("selectSkuNum..1111...="+selectSkuNum.get()+"  skuNum="+skuNum)
+        println("selectSkuNum...2222..="+User())
         activity = this
         setContentView(R.layout.activity_main)
-        initAdapter()
+        tableView = findViewById<RecycleTableView>(R.id.recycleTableView)
+
+        initData(5,5)
+        setAp()
         initTop()
+    }
+
+    fun click1(v: View) {
+        initData(3,3)
+        setAp()
+    }
+
+    fun click2(v: View) {
+        initData(33,6)
+        setAp()
+
+    }
+    fun click3(v: View) {
+        initData(22,7)
+        setAp()
     }
 
     private fun initTop() {
@@ -46,24 +74,25 @@ class MainActivity : AppCompatActivity() {
         gd.setSize(dividerWidth, 0)
         tvContain.dividerDrawable = gd
     }
+    val titleList = ArrayList<String>()
+    val contentData = ArrayList<ArrayList<String>>()
+    fun initData(columnSize:Int,rowSize:Int) {
+        titleList.clear()
+        contentData.clear()
 
-    fun initAdapter() {
-        val columnSize = 7
-        val rowSize = 16
-        val titleList = ArrayList<String>()
         for (columnIndex in 0 until columnSize) {
             if (columnIndex == 0) {
                 titleList.add("编号")
             } else {
-                titleList.add("第" + columnIndex + "列列列")
+                titleList.add("第" + columnIndex + "列")
             }
         }
 
-        val contentData = ArrayList<ArrayList<String>>()
+
         for (rowIndex in 0 until rowSize) {
             val rowList = ArrayList<String>()
             for (columnIndex in 0 until columnSize) {
-                if (columnIndex == 0 && 3==3) {
+                if (columnIndex == 0 && 3 == 2) {
                     rowList.add("编号")
                 } else {
                     rowList.add("" + columnIndex + "列" + rowIndex + "行")
@@ -78,8 +107,22 @@ class MainActivity : AppCompatActivity() {
             // return
         }
 
-        val tableView = findViewById<RecycleTableView<Grade>>(R.id.recycleTableView)
-        tableView.setAdapter(object : TableDataListener<Grade> {
+    }
+
+    fun setAp(){
+        tableView.setAdapter(object : TableDataListener {
+            override fun onBindViewHolderCallBack(tvBinding: TableItemCellTvBinding, rowIndex: Int, tvChildIndex: Int) {
+                tvBinding.setItem(contentData[rowIndex][tvChildIndex])
+            }
+
+            private var lastClickedView: TextView? = null
+            override fun clickedView(binding: TableItemCellTvBinding, columnIndex: Int) {
+                //view.setTextIsSelectable()
+                binding.tv1.isSelected = true
+                lastClickedView?.isSelected = false
+                lastClickedView = binding.tv1
+            }
+
             override fun getTitleText(rowIndex: Int, columnIndex: Int): String {
                 return titleList.get(columnIndex)
             }
@@ -100,6 +143,9 @@ class MainActivity : AppCompatActivity() {
             override fun getColumnSize(): Int {
                 return titleList.size
             }
+
+
         })
+
     }
 }

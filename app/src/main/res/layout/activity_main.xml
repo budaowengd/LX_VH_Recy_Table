@@ -16,19 +16,26 @@
                 android:layout_width="wrap_content"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-            <TextView
+            <Button
                     android:id="@+id/tv1"
-                    android:padding="30dp"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
+                    android:onClick="click1"
                     android:text="你好1"
             />
-            <TextView
-                    android:padding="30dp"
+            <Button
                     android:id="@+id/tv2"
                     android:layout_width="100dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="40dp"
                     android:text="你好2"
+                    android:onClick="click2"
+            />
+            <Button
+                    android:id="@+id/tv3"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:text="你好3"
+                    android:onClick="click3"
             />
         </LinearLayout>
         <TextView
@@ -44,9 +51,14 @@
          android:background="@drawable/sp_border_divider"
         -->
         <com.lx.recytable.RecycleTableView
-                android:layout_margin="40dp"
                 android:id="@+id/recycleTableView"
                 app:item_text_size="15"
+                app:title_text_padding_start="16dp"
+                app:title_text_padding_end="16dp"
+                app:item_text_selected_bg_color="@color/colorAccent"
+                app:item_text_normal_bg_color="#fff"
+                app:item_text_selected_color="#fff"
+                app:item_text_normal_color="@color/colorAccent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
     </LinearLayout>

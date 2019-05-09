@@ -4,10 +4,10 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
+import com.lx.recytable.databinding.TableItemCellTvBinding
 import com.lx.recytable.databinding.TableItemScrollviewBinding
 
 /**
@@ -17,8 +17,8 @@ import com.lx.recytable.databinding.TableItemScrollviewBinding
  * @desc:
  */
 
-class ContentAdapter<T>(
-    context: Context, private val tableView: RecycleTableView<T>, val mContentCallBack: TableDataListener<T>
+class ContentAdapter(
+    context: Context, private val tableView: RecycleTableView, val mContentCallBack: TableDataListener
 ) : RecyclerView.Adapter<ContentAdapter.TableBindingViewHolder<TableItemScrollviewBinding>>() {
     var mLayoutInflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -32,6 +32,8 @@ class ContentAdapter<T>(
         tableView.addItemScrollViewToList(binding.hsScrollView)
         //动态创建每一行item里的单元格TextView
         tableView.createOneRowItemCellTv(binding.llFirstColumnContain, binding.llContainTv)
+
+        println("onCreateViewHolder()....1111111.....")
         return TableBindingViewHolder(binding)
     }
 
@@ -44,16 +46,27 @@ class ContentAdapter<T>(
             //最左侧可固定的列设置数据
             if (index == 0) {
                 val itemCellText = mContentCallBack.getItemCellText(rowIndex, 0)
-                println("onBindViewHolder()........111111.......="+itemCellText)
-                (binding.llFirstColumnContain[0] as TextView).text = itemCellText
+                (binding.llFirstColumnContain.getChildAt(0) as TextView).text = itemCellText
             }
             //可滑动内容区域更新数据
-            val itemCellText = mContentCallBack.getItemCellText(rowIndex, index + 1)
-            (llContainTv.getChildAt(index) as TextView).text = itemCellText
+
+            //可滑动内容区域更新数据
+            val tv = llContainTv.getChildAt(index)
+            // val itemCellText = mContentCallBack.getItemCellText(rowIndex, index + 1) //+1的作用是,index=0,默认就是第1列了
+            //(tv as TextView).text = itemCellText
+
+            val tvBinding = DataBindingUtil.getBinding<TableItemCellTvBinding>(tv)
+            mContentCallBack.onBindViewHolderCallBack(tvBinding!!,rowIndex,index + 1)
+
+
+//            val itemCellText = mContentCallBack.getItemCellText(rowIndex, index + 1)
+//            (llContainTv.getChildAt(index) as TextView).text = itemCellText
+//            mContentCallBack.onBindViewHolderCallBack(holder.binding, rowIndex, index)
         }
     }
 
     override fun getItemCount(): Int {
+        println("getItemCount()....22222.....="+mContentCallBack.getRowSize())
         return mContentCallBack.getRowSize()
     }
 
